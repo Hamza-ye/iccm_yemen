@@ -1,0 +1,1 @@
+export './identifiable_object.dart';
