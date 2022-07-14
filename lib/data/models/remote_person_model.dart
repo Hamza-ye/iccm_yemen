@@ -1,30 +1,34 @@
-import 'common/common.dart';
+import '../../domain/entities/entities.dart';
 import 'models.dart';
 
-// TODO Make immutable
 class RemotePersonModel implements IdentifiableObject {
   @override
   int? id;
+
   @override
   String? uid;
+
   @override
   String? code;
+
   @override
   String? name;
+
   @override
-  String? created;
+  DateTime? created;
+
   @override
-  String? updated;
+  DateTime? updated;
 
   String? uuid;
   String? mobile;
   String? dateOfBirth;
   bool? disabled;
-  IdentifiableObject? userInfo;
-  IdentifiableObject? createdBy;
-  IdentifiableObject? updatedBy;
-  List<IdentifiableObject>? organisationUnits;
-  List<IdentifiableObject>? dataViewOrganisationUnits;
+  RemoteUserModel? userInfo;
+  RemoteUserModel? createdBy;
+  RemoteUserModel? updatedBy;
+  List<RemoteOrganisationUnitModel>? organisationUnits;
+  List<RemoteOrganisationUnitModel>? dataViewOrganisationUnits;
 
   RemotePersonModel(
       {this.id,
@@ -48,66 +52,77 @@ class RemotePersonModel implements IdentifiableObject {
     uid = json['uid'];
     code = json['code'];
     name = json['name'];
-    created = json['created'];
-    updated = json['updated'];
+    created = DateTime.parse(json['created'].toString());
+    updated = DateTime.parse(json['updated'].toString());
     uuid = json['uuid'];
     mobile = json['mobile'];
     dateOfBirth = json['dateOfBirth'];
     disabled = json['disabled'];
     userInfo = json['userInfo'] != null
-        ? new RemoteUserModel.fromJson(json['userInfo'])
+        ? RemoteUserModel.fromJson(json['userInfo'])
         : null;
     createdBy = json['createdBy'] != null
-        ? new RemoteUserModel.fromJson(json['createdBy'])
+        ? RemoteUserModel.fromJson(json['createdBy'])
         : null;
     updatedBy = json['updatedBy'] != null
-        ? new RemoteUserModel.fromJson(json['updatedBy'])
+        ? RemoteUserModel.fromJson(json['updatedBy'])
         : null;
     if (json['organisationUnits'] != null) {
       organisationUnits = <RemoteOrganisationUnitModel>[];
       json['organisationUnits'].forEach((v) {
-        organisationUnits!.add(new RemoteOrganisationUnitModel.fromJson(v));
+        organisationUnits!.add(RemoteOrganisationUnitModel.fromJson(v));
       });
     }
     if (json['dataViewOrganisationUnits'] != null) {
       dataViewOrganisationUnits = <RemoteOrganisationUnitModel>[];
       json['dataViewOrganisationUnits'].forEach((v) {
-        dataViewOrganisationUnits!
-            .add(new RemoteOrganisationUnitModel.fromJson(v));
+        dataViewOrganisationUnits!.add(RemoteOrganisationUnitModel.fromJson(v));
       });
     }
   }
 
   @override
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['uid'] = this.uid;
-    data['code'] = this.code;
-    data['name'] = this.name;
-    data['created'] = this.created;
-    data['updated'] = this.updated;
-    data['uuid'] = this.uuid;
-    data['mobile'] = this.mobile;
-    data['dateOfBirth'] = this.dateOfBirth;
-    data['disabled'] = this.disabled;
-    if (this.userInfo != null) {
-      data['userInfo'] = this.userInfo!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['uid'] = uid;
+    data['code'] = code;
+    data['name'] = name;
+    data['created'] = created;
+    data['updated'] = updated;
+    data['uuid'] = uuid;
+    data['mobile'] = mobile;
+    data['dateOfBirth'] = dateOfBirth;
+    data['disabled'] = disabled;
+    if (userInfo != null) {
+      data['userInfo'] = userInfo?.toJson();
     }
-    if (this.createdBy != null) {
-      data['createdBy'] = this.createdBy!.toJson();
+    if (createdBy != null) {
+      data['createdBy'] = createdBy?.toJson();
     }
-    if (this.updatedBy != null) {
-      data['updatedBy'] = this.updatedBy!.toJson();
+    if (updatedBy != null) {
+      data['updatedBy'] = updatedBy?.toJson();
     }
-    if (this.organisationUnits != null) {
+    if (organisationUnits != null) {
       data['organisationUnits'] =
-          this.organisationUnits!.map((v) => v.toJson()).toList();
+          organisationUnits?.map((v) => v.toJson()).toList();
     }
-    if (this.dataViewOrganisationUnits != null) {
+    if (dataViewOrganisationUnits != null) {
       data['dataViewOrganisationUnits'] =
-          this.dataViewOrganisationUnits!.map((v) => v.toJson()).toList();
+          dataViewOrganisationUnits?.map((v) => v.toJson()).toList();
     }
     return data;
   }
+
+  PersonEntity toEntity() => PersonEntity(
+      id: id,
+      uid: uid,
+      code: code,
+      name: name,
+      uuid: uuid,
+      mobile: mobile,
+      userInfo: userInfo?.toEntity(),
+      organisationUnits: organisationUnits?.map((e) => e.toEntity()).toList(),
+      dataViewOrganisationUnits:
+          dataViewOrganisationUnits?.map((e) => e.toEntity()).toList());
 }

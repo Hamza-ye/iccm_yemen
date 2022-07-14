@@ -1,7 +1,6 @@
-import 'common/common.dart';
+import '../../domain/entities/entities.dart';
 import 'models.dart';
 
-// TODO Make immutable
 class RemoteChvModel implements IdentifiableObject {
   @override
   int? id;
@@ -16,22 +15,21 @@ class RemoteChvModel implements IdentifiableObject {
   String? name;
 
   @override
-  String? created;
+  DateTime? created;
 
   @override
-  String? updated;
+  DateTime? updated;
 
   bool? withdrawn;
   String? dateJoined;
   String? dateWithdrawn;
   String? description;
   RemotePersonModel? person;
-  IdentifiableObject? coveredSubVillages;
-  IdentifiableObject? district;
-  IdentifiableObject? homeSubvillage;
-  IdentifiableObject? createdBy;
-  IdentifiableObject? updatedBy;
-  IdentifiableObject? managingHf;
+  RemoteOrganisationUnitModel? district;
+  RemoteOrganisationUnitModel? homeSubvillage;
+  RemoteUserModel? createdBy;
+  RemoteUserModel? updatedBy;
+  RemoteOrganisationUnitModel? managingHf;
 
   RemoteChvModel(
       {this.id,
@@ -44,7 +42,6 @@ class RemoteChvModel implements IdentifiableObject {
       this.dateWithdrawn,
       this.description,
       this.person,
-      this.coveredSubVillages,
       this.district,
       this.homeSubvillage,
       this.createdBy,
@@ -55,15 +52,15 @@ class RemoteChvModel implements IdentifiableObject {
     id = json['id'];
     uid = json['uid'];
     code = json['code'];
-    created = json['created'];
-    updated = json['updated'];
+    created = DateTime.parse(json['created'].toString());
+    updated = DateTime.parse(json['updated'].toString());
     withdrawn = json['withdrawn'];
     dateJoined = json['dateJoined'];
     dateWithdrawn = json['dateWithdrawn'];
     description = json['description'];
-    person =
-        json['person'] != null ? RemotePersonModel.fromJson(json['person']) : null;
-    coveredSubVillages = json['coveredSubVillages'];
+    person = json['person'] != null
+        ? RemotePersonModel.fromJson(json['person'])
+        : null;
     district = json['district'] != null
         ? RemoteOrganisationUnitModel.fromJson(json['district'])
         : null;
@@ -84,36 +81,47 @@ class RemoteChvModel implements IdentifiableObject {
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = this.id;
-    data['uid'] = this.uid;
-    data['code'] = this.code;
-    data['created'] = this.created;
-    data['updated'] = this.updated;
-    data['withdrawn'] = this.withdrawn;
-    data['dateJoined'] = this.dateJoined;
-    data['dateWithdrawn'] = this.dateWithdrawn;
-    data['description'] = this.description;
-    if (this.person != null) {
-      data['person'] = this.person?.toJson();
+    data['id'] = id;
+    data['uid'] = uid;
+    data['code'] = code;
+    data['created'] = created;
+    data['updated'] = updated;
+    data['withdrawn'] = withdrawn;
+    data['dateJoined'] = dateJoined;
+    data['dateWithdrawn'] = dateWithdrawn;
+    data['description'] = description;
+    if (person != null) {
+      data['person'] = person?.toJson();
     }
-    data['coveredSubVillages'] = this.coveredSubVillages;
-    if (this.district != null) {
-      data['district'] = this.district?.toJson();
+    if (district != null) {
+      data['district'] = district?.toJson();
     }
-    if (this.homeSubvillage != null) {
-      data['homeSubvillage'] = this.homeSubvillage?.toJson();
+    if (homeSubvillage != null) {
+      data['homeSubvillage'] = homeSubvillage?.toJson();
     }
-    if (this.createdBy != null) {
-      data['createdBy'] = this.createdBy?.toJson();
+    if (createdBy != null) {
+      data['createdBy'] = createdBy?.toJson();
     }
-    if (this.updatedBy != null) {
-      data['updatedBy'] = this.updatedBy?.toJson();
+    if (updatedBy != null) {
+      data['updatedBy'] = updatedBy?.toJson();
     }
-    if (this.managingHf != null) {
-      data['managingHf'] = this.managingHf?.toJson();
+    if (managingHf != null) {
+      data['managingHf'] = managingHf?.toJson();
     }
     return data;
   }
+
+  ChvEntity toEntity() => ChvEntity(
+      id: id,
+      uid: uid,
+      code: code,
+      name: name,
+      withdrawn: withdrawn,
+      dateJoined: dateJoined,
+      dateWithdrawn: dateWithdrawn,
+      description: description,
+      person: person?.toEntity(),
+      district: district?.toEntity(),
+      homeSubvillage: homeSubvillage?.toEntity(),
+      managingHf: managingHf?.toEntity());
 }
-
-

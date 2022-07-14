@@ -1,6 +1,6 @@
-import 'package:iccm_yemen/data/models/common/common.dart';
+import '../../domain/entities/entities.dart';
+import 'common/common.dart';
 
-// TODO Make immutable
 class RemoteUserModel implements IdentifiableObject {
   @override
   int? id;
@@ -17,10 +17,10 @@ class RemoteUserModel implements IdentifiableObject {
   }
 
   @override
-  String? created;
+  DateTime? created;
 
   @override
-  String? updated;
+  DateTime? updated;
 
   String? login;
   String? firstName;
@@ -55,21 +55,25 @@ class RemoteUserModel implements IdentifiableObject {
     activated = json['activated'];
     langKey = json['langKey'];
     imageUrl = json['imageUrl'];
+    created = DateTime.parse(json['created'].toString());
+    updated = DateTime.parse(json['updated'].toString());
   }
 
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = this.id;
-    data['uid'] = this.uid;
-    data['code'] = this.code;
-    data['login'] = this.login;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['email'] = this.email;
-    data['activated'] = this.activated;
-    data['langKey'] = this.langKey;
-    data['imageUrl'] = this.imageUrl;
+    data['id'] = id;
+    data['uid'] = uid;
+    data['code'] = code;
+    data['login'] = login;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['email'] = email;
+    data['activated'] = activated;
+    data['langKey'] = langKey;
+    data['imageUrl'] = imageUrl;
     return data;
   }
+
+  UserEntity toEntity() => UserEntity(id: id, uid: uid, code: code, name: name);
 }

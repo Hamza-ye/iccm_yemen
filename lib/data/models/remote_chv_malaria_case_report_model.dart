@@ -1,8 +1,7 @@
-import 'package:iccm_yemen/data/models/common/common.dart';
-import 'package:iccm_yemen/data/models/models.dart';
+import '../../domain/entities/entities.dart';
+import 'models.dart';
 
-// TODO Make immutable
-class ChvMalariaCaseReportModel implements IdentifiableObject {
+class ChvMalariaCaseReportModel implements IdentifiableWithUuidObject {
   @override
   int? id;
 
@@ -10,18 +9,23 @@ class ChvMalariaCaseReportModel implements IdentifiableObject {
   String? uid;
 
   @override
+  String? uuid;
+
+  @override
+  String? code;
+
+  @override
   String? name;
 
   @override
-  String? created;
+  DateTime? created;
 
   @override
-  String? updated;
+  DateTime? updated;
 
-  String? uuid;
-  String? lastSynced;
+  DateTime? lastSynced;
   bool? deleted;
-  String? dateOfExamination;
+  DateTime? dateOfExamination;
   String? mobile;
   String? gender;
   bool? isPregnant;
@@ -33,17 +37,19 @@ class ChvMalariaCaseReportModel implements IdentifiableObject {
   String? barImageUrl;
   String? comment;
   String? status;
-  IdentifiableObject? subVillage;
-  IdentifiableObject? createdBy;
-  IdentifiableObject? updatedBy;
-  IdentifiableObject? chv;
-  GpsLocationModel? gpsLocation;
-  IdentifiableObject? ageGroup;
+  RemoteOrganisationUnitModel? subVillage;
+  RemoteUserModel? createdBy;
+  RemoteUserModel? updatedBy;
+  RemoteChvModel? chv;
+  RemoteGpsLocationModel? gpsLocation;
+  RemoteAgeGroupModel? ageGroup;
+  bool? synced;
 
   ChvMalariaCaseReportModel(
       {this.id,
       this.uid,
       this.uuid,
+      this.code,
       this.name,
       this.created,
       this.updated,
@@ -66,18 +72,19 @@ class ChvMalariaCaseReportModel implements IdentifiableObject {
       this.updatedBy,
       this.chv,
       this.gpsLocation,
-      this.ageGroup});
+      this.ageGroup,
+      this.synced});
 
   ChvMalariaCaseReportModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     uid = json['uid'];
     uuid = json['uuid'];
     name = json['name'];
-    created = json['created'];
-    updated = json['updated'];
-    lastSynced = json['lastSynced'];
+    created = DateTime.parse(json['created'].toString());
+    updated = DateTime.parse(json['updated'].toString());
+    lastSynced = DateTime.parse(json['lastSynced'].toString());
     deleted = json['deleted'];
-    dateOfExamination = json['dateOfExamination'];
+    dateOfExamination = DateTime.parse(json['dateOfExamination'].toString());
     mobile = json['mobile'];
     gender = json['gender'];
     isPregnant = json['isPregnant'];
@@ -90,67 +97,90 @@ class ChvMalariaCaseReportModel implements IdentifiableObject {
     comment = json['comment'];
     status = json['status'];
     subVillage = json['subVillage'] != null
-        ? new RemoteOrganisationUnitModel.fromJson(json['subVillage'])
+        ? RemoteOrganisationUnitModel.fromJson(json['subVillage'])
         : null;
     createdBy = json['createdBy'] != null
-        ? new RemoteUserModel.fromJson(json['createdBy'])
+        ? RemoteUserModel.fromJson(json['createdBy'])
         : null;
     updatedBy = json['updatedBy'] != null
-        ? new RemoteUserModel.fromJson(json['updatedBy'])
+        ? RemoteUserModel.fromJson(json['updatedBy'])
         : null;
-    chv = json['chv'] != null ? new RemoteChvModel.fromJson(json['chv']) : null;
+    chv = json['chv'] != null ? RemoteChvModel.fromJson(json['chv']) : null;
     gpsLocation = json['gpsLocation'] != null
-        ? new GpsLocationModel.fromJson(json['gpsLocation'])
+        ? RemoteGpsLocationModel.fromJson(json['gpsLocation'])
         : null;
     ageGroup = json['ageGroup'] != null
-        ? new RemoteAgeGroupModel.fromJson(json['ageGroup'])
+        ? RemoteAgeGroupModel.fromJson(json['ageGroup'])
         : null;
   }
 
   @override
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['uid'] = this.uid;
-    data['uuid'] = this.uuid;
-    data['name'] = this.name;
-    data['created'] = this.created;
-    data['updated'] = this.updated;
-    data['lastSynced'] = this.lastSynced;
-    data['deleted'] = this.deleted;
-    data['dateOfExamination'] = this.dateOfExamination;
-    data['mobile'] = this.mobile;
-    data['gender'] = this.gender;
-    data['isPregnant'] = this.isPregnant;
-    data['malariaTestResult'] = this.malariaTestResult;
-    data['severity'] = this.severity;
-    data['drugsGiven'] = this.drugsGiven;
-    data['suppsGiven'] = this.suppsGiven;
-    data['referral'] = this.referral;
-    data['barImageUrl'] = this.barImageUrl;
-    data['comment'] = this.comment;
-    data['status'] = this.status;
-    if (this.subVillage != null) {
-      data['subVillage'] = this.subVillage?.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['uid'] = uid;
+    data['uuid'] = uuid;
+    data['name'] = name;
+    data['created'] = created;
+    data['updated'] = updated;
+    data['lastSynced'] = lastSynced;
+    data['deleted'] = deleted;
+    data['dateOfExamination'] = dateOfExamination;
+    data['mobile'] = mobile;
+    data['gender'] = gender;
+    data['isPregnant'] = isPregnant;
+    data['malariaTestResult'] = malariaTestResult;
+    data['severity'] = severity;
+    data['drugsGiven'] = drugsGiven;
+    data['suppsGiven'] = suppsGiven;
+    data['referral'] = referral;
+    data['barImageUrl'] = barImageUrl;
+    data['comment'] = comment;
+    data['status'] = status;
+    if (subVillage != null) {
+      data['subVillage'] = subVillage?.toJson();
     }
-    if (this.createdBy != null) {
-      data['createdBy'] = this.createdBy?.toJson();
+    if (createdBy != null) {
+      data['createdBy'] = createdBy?.toJson();
     }
-    if (this.updatedBy != null) {
-      data['updatedBy'] = this.updatedBy?.toJson();
+    if (updatedBy != null) {
+      data['updatedBy'] = updatedBy?.toJson();
     }
-    if (this.chv != null) {
-      data['chv'] = this.chv?.toJson();
+    if (chv != null) {
+      data['chv'] = chv?.toJson();
     }
-    if (this.gpsLocation != null) {
-      data['gpsLocation'] = this.gpsLocation?.toJson();
+    if (gpsLocation != null) {
+      data['gpsLocation'] = gpsLocation?.toJson();
     }
-    if (this.ageGroup != null) {
-      data['ageGroup'] = this.ageGroup?.toJson();
+    if (ageGroup != null) {
+      data['ageGroup'] = ageGroup?.toJson();
     }
     return data;
   }
 
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+  ChvMalariaCaseReportEntity toEntity() => ChvMalariaCaseReportEntity(
+      id: id,
+      uid: uid,
+      code: code,
+      uuid: uuid,
+      name: name,
+      lastSynced: lastSynced,
+      deleted: deleted,
+      dateOfExamination: dateOfExamination,
+      mobile: mobile,
+      gender: gender,
+      isPregnant: isPregnant,
+      malariaTestResult: malariaTestResult,
+      severity: severity,
+      drugsGiven: drugsGiven,
+      suppsGiven: suppsGiven,
+      referral: referral,
+      barImageUrl: barImageUrl,
+      comment: comment,
+      status: status,
+      subVillage: subVillage?.toEntity(),
+      chv: chv?.toEntity(),
+      gpsLocation: gpsLocation?.toEntity(),
+      ageGroup: ageGroup?.toEntity(),
+      synced: synced);
 }

@@ -3,8 +3,8 @@ abstract class IdentifiableObject {
   String? get uid;
   String? get code;
   String? get name;
-  String? get created;
-  String? get updated;
+  DateTime? get created;
+  DateTime? get updated;
 
   // set id(int? id);
   // set uid(String? uid);

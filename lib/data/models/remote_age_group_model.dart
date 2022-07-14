@@ -1,7 +1,8 @@
-import 'package:iccm_yemen/data/models/common/common.dart';
 
-// TODO Make immutable
-class RemoteAgeGroupModel implements IdentifiableObject{
+import '../../domain/entities/entities.dart';
+import 'models.dart';
+
+class RemoteAgeGroupModel implements IdentifiableObject {
   @override
   int? id;
   @override
@@ -11,22 +12,21 @@ class RemoteAgeGroupModel implements IdentifiableObject{
   @override
   String? name;
   @override
-  String? created;
+  DateTime? created;
   @override
-  String? updated;
+  DateTime? updated;
 
   String? shortName;
   String? description;
 
-  RemoteAgeGroupModel(
-      {this.id,
-        this.uid,
-        this.code,
-        this.name,
-        this.shortName,
-        this.description,
-        this.created,
-        this.updated});
+  RemoteAgeGroupModel({this.id,
+    this.uid,
+    this.code,
+    this.name,
+    this.shortName,
+    this.description,
+    this.created,
+    this.updated});
 
   RemoteAgeGroupModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -35,21 +35,29 @@ class RemoteAgeGroupModel implements IdentifiableObject{
     name = json['name'];
     shortName = json['shortName'];
     description = json['description'];
-    created = json['created'];
-    updated = json['updated'];
+    created = DateTime.parse(json['created'].toString());
+    updated = DateTime.parse(json['updated'].toString());
   }
 
   @override
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['uid'] = this.uid;
-    data['code'] = this.code;
-    data['name'] = this.name;
-    data['shortName'] = this.shortName;
-    data['description'] = this.description;
-    data['created'] = this.created;
-    data['updated'] = this.updated;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['uid'] = uid;
+    data['code'] = code;
+    data['name'] = name;
+    data['shortName'] = shortName;
+    data['description'] = description;
+    data['created'] = created;
+    data['updated'] = updated;
     return data;
   }
+
+  AgeGroupEntity toEntity() =>
+      AgeGroupEntity(id: id,
+          uid: uid,
+          code: code,
+          name: name,
+          shortName: shortName,
+          description: description);
 }

@@ -1,40 +1,51 @@
-class GpsLocationModel {
+import '../../domain/entities/entities.dart';
+
+class RemoteGpsLocationModel {
   int? id;
   String? code;
-  int? latitude;
-  int? longitude;
-  String? timestamp;
-  int? altitude;
-  int? accuracy;
+  double? latitude;
+  double? longitude;
+  DateTime? timestamp;
+  double? altitude;
+  double? accuracy;
 
-  GpsLocationModel(
+  RemoteGpsLocationModel(
       {this.id,
-        this.code,
-        this.latitude,
-        this.longitude,
-        this.timestamp,
-        this.altitude,
-        this.accuracy});
+      this.code,
+      this.latitude,
+      this.longitude,
+      this.timestamp,
+      this.altitude,
+      this.accuracy});
 
-  GpsLocationModel.fromJson(Map<String, dynamic> json) {
+  RemoteGpsLocationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     code = json['code'];
     latitude = json['latitude'];
     longitude = json['longitude'];
-    timestamp = json['timestamp'];
+    timestamp = DateTime.parse(json['timestamp'].toString());
     altitude = json['altitude'];
     accuracy = json['accuracy'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['code'] = this.code;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['timestamp'] = this.timestamp;
-    data['altitude'] = this.altitude;
-    data['accuracy'] = this.accuracy;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['code'] = code;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['timestamp'] = timestamp;
+    data['altitude'] = altitude;
+    data['accuracy'] = accuracy;
     return data;
   }
+
+  GpsLocationEntity toEntity() => GpsLocationEntity(
+      id: id,
+      code: code,
+      latitude: latitude,
+      longitude: longitude,
+      timestamp: timestamp,
+      altitude: altitude,
+      accuracy: accuracy);
 }
