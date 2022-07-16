@@ -2,7 +2,7 @@ import '../../../data/usecases/usecases.dart';
 import '../../../domain/usecases/usecases.dart';
 import '../factories.dart';
 
-Authentication makeRemoteAuthentication() => RemoteAuthentication(
+AddAccount makeRemoteAddAccount() => RemoteAddAccount(
   httpClient: makeHttpAdapter(),
-  url: makeApiUrl('authenticate')
+  url: makeApiUrl('signup')
 );

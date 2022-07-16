@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../../data/http/http.dart';
 
 import 'package:http/http.dart';
@@ -29,6 +31,11 @@ class HttpAdapter implements HttpClient {
       }
     } catch(error) {
       throw HttpError.serverError;
+    }
+    // TODO log
+    if (kDebugMode) {
+      print(
+          '###### response: $response');
     }
     return _handleResponse(response);
   }
