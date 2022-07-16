@@ -16,20 +16,9 @@ class RemoteAuthentication implements Authentication {
   Future<AccountEntity> auth(AuthenticationParams params) async {
     final body = RemoteAuthenticationParams.fromDomain(params).toJson();
 
-    // TODO log
-    if (kDebugMode) {
-      print(
-          'url: $url #########RemoteAuthentication.auth.params: $params ###### body: $body');
-    }
-
     try {
       final httpResponse =
           await httpClient.request(url: url, method: 'post', body: body);
-      // TODO log
-      if (kDebugMode) {
-        print(
-            'url: $url #########RemoteAuthentication.auth.params: $params, ###### body: $body, ###### returned httpResponse: $httpResponse');
-      }
       return RemoteAccountModel.fromJson(httpResponse).toEntity();
     } on HttpError catch (error) {
       throw error == HttpError.unauthorized
@@ -48,5 +37,6 @@ class RemoteAuthenticationParams {
   factory RemoteAuthenticationParams.fromDomain(AuthenticationParams params) =>
       RemoteAuthenticationParams(email: params.email, password: params.secret);
 
-  Map toJson() => {'username': email, 'rememberMe': false, 'password': password};
+  Map toJson() =>
+      {'username': email, 'rememberMe': false, 'password': password};
 }
