@@ -1,14 +1,14 @@
 enum MalariaTestResultEnum { negative, pf, pv, mix, invalid }
 
-enum GenderEnum { male, female }
+enum GenderEnum { male, female, none }
 
 enum AgeGroupEnum { lessThan5y, greaterThan5y }
 
-enum SeverityEnum { simple, severe }
+enum SeverityEnum { simple, severe, none }
 
 enum ReportStatusEnum { complete, incomplete }
 
-enum YesNoEnum { yes, no }
+enum YesNoEnum { yes, no, none }
 
 extension MalariaTestResultEnumExtension on MalariaTestResultEnum {
   String get value {
