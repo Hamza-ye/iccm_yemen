@@ -1,7 +1,7 @@
 import '../../domain/entities/entities.dart';
 import 'models.dart';
 
-class ChvMalariaCaseReportModel implements IdentifiableWithUuidObject {
+class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
   @override
   int? id;
 
@@ -45,7 +45,7 @@ class ChvMalariaCaseReportModel implements IdentifiableWithUuidObject {
   RemoteAgeGroupModel? ageGroup;
   bool? synced;
 
-  ChvMalariaCaseReportModel(
+  RemoteChvMalariaCaseModel(
       {this.id,
       this.uid,
       this.uuid,
@@ -75,7 +75,7 @@ class ChvMalariaCaseReportModel implements IdentifiableWithUuidObject {
       this.ageGroup,
       this.synced});
 
-  ChvMalariaCaseReportModel.fromJson(Map<String, dynamic> json) {
+  RemoteChvMalariaCaseModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     uid = json['uid'];
     uuid = json['uuid'];
@@ -114,9 +114,10 @@ class ChvMalariaCaseReportModel implements IdentifiableWithUuidObject {
         : null;
   }
 
+  // TODO No need for toJson function in a remote model
   @override
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['uid'] = uid;
     data['uuid'] = uuid;
@@ -158,7 +159,7 @@ class ChvMalariaCaseReportModel implements IdentifiableWithUuidObject {
     return data;
   }
 
-  ChvMalariaCaseReportEntity toEntity() => ChvMalariaCaseReportEntity(
+  ChvMalariaCaseEntity toEntity() => ChvMalariaCaseEntity(
       id: id,
       uid: uid,
       code: code,

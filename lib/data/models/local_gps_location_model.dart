@@ -1,6 +1,8 @@
-import '../../domain/entities/entities.dart';
+import 'package:iccm_yemen/data/models/models.dart';
 
-class RemoteGpsLocationModel {
+import '../../../domain/entities/entities.dart';
+
+class LocalGpsLocationModel {
   int? id;
   String? code;
   double? latitude;
@@ -9,7 +11,7 @@ class RemoteGpsLocationModel {
   double? altitude;
   double? accuracy;
 
-  RemoteGpsLocationModel(
+  LocalGpsLocationModel(
       {this.id,
       this.code,
       this.latitude,
@@ -18,7 +20,7 @@ class RemoteGpsLocationModel {
       this.altitude,
       this.accuracy});
 
-  RemoteGpsLocationModel.fromJson(Map<String, dynamic> json) {
+  LocalGpsLocationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     code = json['code'];
     latitude = json['latitude'];
@@ -39,6 +41,16 @@ class RemoteGpsLocationModel {
     data['accuracy'] = accuracy;
     return data;
   }
+
+  factory LocalGpsLocationModel.fromEntity(GpsLocationEntity? entity) =>
+      LocalGpsLocationModel(
+          id: entity?.id,
+          code: entity?.code,
+          latitude: entity?.latitude,
+          longitude: entity?.longitude,
+          timestamp: entity?.timestamp,
+          altitude: entity?.altitude,
+          accuracy: entity?.accuracy);
 
   GpsLocationEntity toEntity() => GpsLocationEntity(
       id: id,

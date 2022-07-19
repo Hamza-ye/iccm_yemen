@@ -5,5 +5,15 @@ export './remote_chv_model.dart';
 export './remote_organisation_unit_model.dart';
 export './remote_person_model.dart';
 export './remote_age_group_model.dart';
-export './gps_location_model.dart';
-export './remote_chv_malaria_case_report_model.dart';
+export './remote_gps_location_model.dart';
+export './remote_chv_malaria_case_model.dart';
+export './local_chv_malaria_case_model.dart';
+
+export './local_account_model.dart';
+export './local_age_group_model.dart';
+export './local_account_model.dart';
+export './local_chv_model.dart';
+export './local_gps_location_model.dart';
+export './local_organisation_unit_model.dart';
+export './local_person_model.dart';
+export './local_user_model.dart';

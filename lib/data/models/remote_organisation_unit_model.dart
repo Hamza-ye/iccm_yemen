@@ -113,6 +113,7 @@ class RemoteOrganisationUnitModel implements IdentifiableObject {
     }
   }
 
+  // TODO No need for toJson function in a remote model
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -151,6 +152,9 @@ class RemoteOrganisationUnitModel implements IdentifiableObject {
     return data;
   }
 
-  OrganisationUnitEntity toEntity() =>
-      OrganisationUnitEntity(id: id, uid: uid, code: code, name: name);
+  OrganisationUnitEntity toEntity() => OrganisationUnitEntity(
+      id: id,
+      uid: uid,
+      code: code,
+      name: name);
 }

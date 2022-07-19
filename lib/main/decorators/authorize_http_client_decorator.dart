@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import '../../data/cache/cache.dart';
 import '../../data/http/http.dart';
 
@@ -14,6 +12,7 @@ class AuthorizeHttpClientDecorator implements HttpClient {
     required this.decoratee,
   });
 
+  @override
   Future<dynamic> request({
     required String url,
     required String method,

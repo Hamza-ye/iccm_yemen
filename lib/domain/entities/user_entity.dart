@@ -12,10 +12,12 @@ class UserEntity extends IdentifiableEntity {
 
   @override
   final String? name;
+  final String? login;
 
   const UserEntity(
       {required this.id,
       required this.uid,
       required this.code,
-      required this.name});
+      required this.name,
+      required this.login});
 }

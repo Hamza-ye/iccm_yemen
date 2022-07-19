@@ -23,6 +23,7 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   localstorage: ^4.0.0+1
   carousel_slider: ^4.1.1
+#  freezed_annotation: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +32,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   mocktail: ^0.3.0
   faker: ^2.0.0
+#  freezed: ^2.1.0+1
+#  build_runner: ^2.2.0
 
 flutter:
   uses-material-design: true

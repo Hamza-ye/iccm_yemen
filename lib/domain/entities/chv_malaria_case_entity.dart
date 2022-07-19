@@ -1,6 +1,6 @@
 import 'entities.dart';
 
-class ChvMalariaCaseReportEntity extends IdentifiableWithUuidEntity {
+class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
   @override
   final int? id;
 
@@ -37,7 +37,7 @@ class ChvMalariaCaseReportEntity extends IdentifiableWithUuidEntity {
   final AgeGroupEntity? ageGroup;
   final bool? synced;
 
-  const ChvMalariaCaseReportEntity(
+  const ChvMalariaCaseEntity(
       {required this.id,
       required this.uid,
       required this.code,

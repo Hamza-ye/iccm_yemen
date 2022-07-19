@@ -59,6 +59,7 @@ class RemoteUserModel implements IdentifiableObject {
     updated = DateTime.parse(json['updated'].toString());
   }
 
+  // TODO No need for toJson function in a remote model
   @override
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -75,5 +76,6 @@ class RemoteUserModel implements IdentifiableObject {
     return data;
   }
 
-  UserEntity toEntity() => UserEntity(id: id, uid: uid, code: code, name: name);
+  UserEntity toEntity() =>
+      UserEntity(id: id, uid: uid, code: code, name: name, login: login);
 }

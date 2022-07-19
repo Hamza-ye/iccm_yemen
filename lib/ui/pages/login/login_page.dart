@@ -7,7 +7,8 @@ import './login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LoginPage extends StatelessWidget with KeyboardManager, LoadingManager, UIErrorManager, NavigationManager {
+class LoginPage extends StatelessWidget
+    with KeyboardManager, LoadingManager, UIErrorManager, NavigationManager {
   final LoginPresenter presenter;
 
   LoginPage(this.presenter);
@@ -38,15 +39,15 @@ class LoginPage extends StatelessWidget with KeyboardManager, LoadingManager, UI
                           children: <Widget>[
                             EmailInput(),
                             Padding(
-                              padding: const EdgeInsets.only(top: 8, bottom: 32),
+                              padding:
+                                  const EdgeInsets.only(top: 8, bottom: 32),
                               child: PasswordInput(),
                             ),
                             LoginButton(),
                             TextButton.icon(
                                 onPressed: presenter.goToSignUp,
                                 icon: const Icon(Icons.person),
-                                label: Text('R.string.addAccount')
-                            )
+                                label: Text('R.string.addAccount'))
                           ],
                         ),
                       ),

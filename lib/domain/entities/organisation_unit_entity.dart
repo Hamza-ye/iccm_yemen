@@ -1,3 +1,5 @@
+import 'package:iccm_yemen/domain/entities/entities.dart';
+
 import 'common/common.dart';
 
 class OrganisationUnitEntity extends IdentifiableEntity {
@@ -17,6 +19,6 @@ class OrganisationUnitEntity extends IdentifiableEntity {
     required this.id,
     required this.uid,
     required this.code,
-    required this.name,
+    required this.name
   });
 }
