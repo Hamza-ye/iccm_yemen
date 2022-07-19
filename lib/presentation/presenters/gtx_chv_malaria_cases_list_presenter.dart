@@ -6,7 +6,7 @@ import '../../ui/helpers/helpers.dart';
 import '../../ui/pages/pages.dart';
 import '../mixins/mixins.dart';
 
-class GetxSurveysPresenter extends GetxController
+class GetxChvMalariaCasesListPresenter extends GetxController
     with SessionManager, LoadingManager, NavigationManager
     implements ChvMalariaCasesListPresenter {
   final LoadChvMalariaCasesList loadChvMalariaCases;
@@ -17,7 +17,7 @@ class GetxSurveysPresenter extends GetxController
   Stream<List<ChvMalariaCaseViewModel>> get chvMalariaCasesStream =>
       _chvMalariaCases.stream;
 
-  GetxSurveysPresenter({required this.loadChvMalariaCases});
+  GetxChvMalariaCasesListPresenter({required this.loadChvMalariaCases});
 
   @override
   Future<void> loadData() async {
