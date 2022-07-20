@@ -17,6 +17,8 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
   @override
   String? name;
 
+  int? age;
+
   @override
   DateTime? created;
 
@@ -42,7 +44,8 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
   LocalUserModel? updatedBy;
   LocalChvModel? chv;
   LocalGpsLocationModel? gpsLocation;
-  LocalAgeGroupModel? ageGroup;
+
+  // LocalAgeGroupModel? ageGroup;
   bool? synced;
 
   LocalChvMalariaCaseModel(
@@ -51,6 +54,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
       this.uuid,
       this.code,
       this.name,
+      this.age,
       this.created,
       this.updated,
       this.lastSynced,
@@ -72,7 +76,6 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
       this.updatedBy,
       this.chv,
       this.gpsLocation,
-      this.ageGroup,
       this.synced});
 
   LocalChvMalariaCaseModel.fromJson(Map<String, dynamic> json) {
@@ -80,6 +83,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
     uid = json['uid'];
     uuid = json['uuid'];
     name = json['name'];
+    age = json['age'];
     created = DateTime.parse(json['created'].toString());
     updated = DateTime.parse(json['updated'].toString());
     lastSynced = DateTime.parse(json['lastSynced'].toString());
@@ -109,9 +113,9 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
     gpsLocation = json['gpsLocation'] != null
         ? LocalGpsLocationModel.fromJson(json['gpsLocation'])
         : null;
-    ageGroup = json['ageGroup'] != null
-        ? LocalAgeGroupModel.fromJson(json['ageGroup'])
-        : null;
+    // ageGroup = json['ageGroup'] != null
+    //     ? LocalAgeGroupModel.fromJson(json['ageGroup'])
+    //     : null;
   }
 
   @override
@@ -121,6 +125,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
     data['uid'] = uid;
     data['uuid'] = uuid;
     data['name'] = name;
+    data['age'] = age;
     data['created'] = created;
     data['updated'] = updated;
     data['lastSynced'] = lastSynced;
@@ -152,9 +157,9 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
     if (gpsLocation != null) {
       data['gpsLocation'] = gpsLocation?.toJson();
     }
-    if (ageGroup != null) {
-      data['ageGroup'] = ageGroup?.toJson();
-    }
+    // if (ageGroup != null) {
+    //   data['ageGroup'] = ageGroup?.toJson();
+    // }
     return data;
   }
 
@@ -165,6 +170,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
           code: entity.code,
           uuid: entity.uuid,
           name: entity.name,
+          age: entity.age,
           lastSynced: entity.lastSynced,
           deleted: entity.deleted,
           dateOfExamination: entity.dateOfExamination,
@@ -182,7 +188,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
           subVillage: LocalOrganisationUnitModel.fromEntity(entity.subVillage),
           chv: LocalChvModel.fromEntity(entity.chv),
           gpsLocation: LocalGpsLocationModel.fromEntity(entity.gpsLocation),
-          ageGroup: LocalAgeGroupModel.fromEntity(entity.ageGroup),
+          // ageGroup: LocalAgeGroupModel.fromEntity(entity.ageGroup),
           synced: entity.synced);
 
   ChvMalariaCaseEntity toEntity() => ChvMalariaCaseEntity(
@@ -191,6 +197,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
       code: code,
       uuid: uuid,
       name: name,
+      age: age,
       lastSynced: lastSynced,
       deleted: deleted,
       dateOfExamination: dateOfExamination,
@@ -208,6 +215,6 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
       subVillage: subVillage?.toEntity(),
       chv: chv?.toEntity(),
       gpsLocation: gpsLocation?.toEntity(),
-      ageGroup: ageGroup?.toEntity(),
+      // ageGroup: ageGroup?.toEntity(),
       synced: synced);
 }

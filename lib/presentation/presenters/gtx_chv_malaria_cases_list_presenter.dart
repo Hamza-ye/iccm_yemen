@@ -5,10 +5,12 @@ import '../../domain/usecases/usecases.dart';
 import '../../ui/helpers/helpers.dart';
 import '../../ui/pages/pages.dart';
 import '../mixins/mixins.dart';
+import '../protocols/protocols.dart';
 
 class GetxChvMalariaCasesListPresenter extends GetxController
     with SessionManager, LoadingManager, NavigationManager
     implements ChvMalariaCasesListPresenter {
+  final Validation validation;
   final LoadChvMalariaCasesList loadChvMalariaCases;
 
   final _chvMalariaCases = Rx<List<ChvMalariaCaseViewModel>>([]);
@@ -17,7 +19,8 @@ class GetxChvMalariaCasesListPresenter extends GetxController
   Stream<List<ChvMalariaCaseViewModel>> get chvMalariaCasesStream =>
       _chvMalariaCases.stream;
 
-  GetxChvMalariaCasesListPresenter({required this.loadChvMalariaCases});
+  GetxChvMalariaCasesListPresenter(
+      {required this.loadChvMalariaCases, required this.validation});
 
   @override
   Future<void> loadData() async {

@@ -20,6 +20,7 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
   final bool? deleted;
   final DateTime? dateOfExamination;
   final String? mobile;
+  final int? age;
   final String? gender;
   final bool? isPregnant;
   final String? malariaTestResult;
@@ -34,7 +35,8 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
 
   final ChvEntity? chv;
   final GpsLocationEntity? gpsLocation;
-  final AgeGroupEntity? ageGroup;
+
+  // final AgeGroupEntity? ageGroup;
   final bool? synced;
 
   const ChvMalariaCaseEntity(
@@ -42,6 +44,7 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
       required this.uid,
       required this.code,
       required this.uuid,
+      required this.age,
       required this.name,
       required this.lastSynced,
       required this.deleted,
@@ -60,7 +63,6 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
       required this.subVillage,
       required this.chv,
       required this.gpsLocation,
-      required this.ageGroup,
       required this.synced});
 
   @override
@@ -68,6 +70,7 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
     ..addAll([
       dateOfExamination,
       mobile,
+      age,
       gender,
       isPregnant,
       malariaTestResult,
@@ -80,7 +83,6 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
       subVillage,
       chv,
       gpsLocation,
-      ageGroup,
       synced,
       lastSynced,
     ]);

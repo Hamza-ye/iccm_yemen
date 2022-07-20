@@ -17,6 +17,8 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
   @override
   String? name;
 
+  int? age;
+
   @override
   DateTime? created;
 
@@ -51,6 +53,7 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
       this.uuid,
       this.code,
       this.name,
+      this.age,
       this.created,
       this.updated,
       this.lastSynced,
@@ -72,7 +75,7 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
       this.updatedBy,
       this.chv,
       this.gpsLocation,
-      this.ageGroup,
+      // this.ageGroup,
       this.synced});
 
   RemoteChvMalariaCaseModel.fromJson(Map<String, dynamic> json) {
@@ -80,6 +83,7 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
     uid = json['uid'];
     uuid = json['uuid'];
     name = json['name'];
+    age = json['age'];
     created = DateTime.parse(json['created'].toString());
     updated = DateTime.parse(json['updated'].toString());
     lastSynced = DateTime.parse(json['lastSynced'].toString());
@@ -109,9 +113,9 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
     gpsLocation = json['gpsLocation'] != null
         ? RemoteGpsLocationModel.fromJson(json['gpsLocation'])
         : null;
-    ageGroup = json['ageGroup'] != null
-        ? RemoteAgeGroupModel.fromJson(json['ageGroup'])
-        : null;
+    // ageGroup = json['ageGroup'] != null
+    //     ? RemoteAgeGroupModel.fromJson(json['ageGroup'])
+    //     : null;
   }
 
   // TODO No need for toJson function in a remote model
@@ -122,6 +126,7 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
     data['uid'] = uid;
     data['uuid'] = uuid;
     data['name'] = name;
+    data['age'] = age;
     data['created'] = created;
     data['updated'] = updated;
     data['lastSynced'] = lastSynced;
@@ -153,9 +158,9 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
     if (gpsLocation != null) {
       data['gpsLocation'] = gpsLocation?.toJson();
     }
-    if (ageGroup != null) {
-      data['ageGroup'] = ageGroup?.toJson();
-    }
+    // if (ageGroup != null) {
+    //   data['ageGroup'] = ageGroup?.toJson();
+    // }
     return data;
   }
 
@@ -165,6 +170,7 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
       code: code,
       uuid: uuid,
       name: name,
+      age: age,
       lastSynced: lastSynced,
       deleted: deleted,
       dateOfExamination: dateOfExamination,
@@ -182,6 +188,6 @@ class RemoteChvMalariaCaseModel implements IdentifiableWithUuidObject {
       subVillage: subVillage?.toEntity(),
       chv: chv?.toEntity(),
       gpsLocation: gpsLocation?.toEntity(),
-      ageGroup: ageGroup?.toEntity(),
+      // ageGroup: ageGroup?.toEntity(),
       synced: synced);
 }
