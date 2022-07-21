@@ -17,7 +17,7 @@ class LocalChvMalariaCaseModel implements IdentifiableWithUuidObject {
   @override
   String? name;
 
-  int? age;
+  double? age;
 
   @override
   DateTime? created;

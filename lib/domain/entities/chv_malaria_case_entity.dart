@@ -20,7 +20,7 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
   final bool? deleted;
   final DateTime? dateOfExamination;
   final String? mobile;
-  final int? age;
+  final double? age;
   final String? gender;
   final bool? isPregnant;
   final String? malariaTestResult;
@@ -86,4 +86,30 @@ class ChvMalariaCaseEntity extends IdentifiableWithUuidEntity {
       synced,
       lastSynced,
     ]);
+
+  Map<String, dynamic> toMap() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['uuid'] = uuid;
+    data['name'] = name;
+    data['age'] = age;
+    // data['created'] = created;
+    data['dateOfExamination'] = dateOfExamination;
+    data['mobile'] = mobile;
+    data['gender'] = gender;
+    data['isPregnant'] = isPregnant;
+    data['malariaTestResult'] = malariaTestResult;
+    data['severity'] = severity;
+    data['drugsGiven'] = drugsGiven;
+    data['suppsGiven'] = suppsGiven;
+    data['referral'] = referral;
+    data['barImageUrl'] = barImageUrl;
+    data['comment'] = comment;
+    data['status'] = status;
+    data['subVillage'] = subVillage;
+    // data['createdBy'] = createdBy;
+    data['chv'] = chv;
+    data['gpsLocation'] = gpsLocation;
+    return data;
+  }
 }

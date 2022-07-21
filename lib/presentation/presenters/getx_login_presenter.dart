@@ -76,7 +76,7 @@ class GetxLoginPresenter extends GetxController
       final account = await authentication
           .auth(AuthenticationParams(email: _email!, secret: _password!));
       await saveCurrentAccount.save(account);
-      navigateTo = '/surveys';
+      navigateTo = '/chv_malaria_cases_list';
     } on DomainError catch (error) {
       switch (error) {
         case DomainError.invalidCredentials:

@@ -36,5 +36,5 @@ class RemoteAuthenticationParams {
       RemoteAuthenticationParams(email: params.email, password: params.secret);
 
   Map toJson() =>
-      {'username': email, 'rememberMe': false, 'password': password};
+      {'username': email, 'rememberMe': true, 'password': password};
 }

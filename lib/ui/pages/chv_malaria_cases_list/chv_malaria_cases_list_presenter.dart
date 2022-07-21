@@ -14,5 +14,5 @@ abstract class ChvMalariaCasesListPresenter implements Listenable {
   Future<void> loadData();
   Future<void> completeChvMalariaCase(int caseId);
   Future<void> syncChvMalariaCase(int caseId);
-  void goToChvMalariaCaseForm(String caseId);
+  void goToChvMalariaCaseForm(int? caseId);
 }

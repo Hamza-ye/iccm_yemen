@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../domain/helpers/helpers.dart';
@@ -27,23 +28,40 @@ class GetxChvMalariaCasesListPresenter extends GetxController
     try {
       isLoading = true;
       final chvMalariaCases = await loadChvMalariaCases.load();
+
       _chvMalariaCases.value = chvMalariaCases.map((chvMalariaCase) {
-        // TODO validation Logic and may create list of errors and add it to model
-        // TODO add if no drugs given due to stock out option
+        final validationErrors = _validateFields(chvMalariaCase.toMap());
+
+        final canComplete =
+            validationErrors.isEmpty && chvMalariaCase.status == 'INCOMPLETE';
+        final canSync = chvMalariaCase.synced == false && canComplete;
         return ChvMalariaCaseViewModel(
-            // TODO Remaining props:
             id: chvMalariaCase.id,
             code: chvMalariaCase.code,
+            uuid: chvMalariaCase.uuid,
             name: chvMalariaCase.name,
+            age: chvMalariaCase.age,
+            deleted: chvMalariaCase.deleted,
+            dateOfExamination: chvMalariaCase.dateOfExamination,
+            mobile: chvMalariaCase.mobile,
+            gender: chvMalariaCase.gender,
+            isPregnant: chvMalariaCase.isPregnant,
+            malariaTestResult: chvMalariaCase.malariaTestResult,
+            severity: chvMalariaCase.severity,
+            drugsGiven: chvMalariaCase.drugsGiven,
+            suppsGiven: chvMalariaCase.suppsGiven,
+            referral: chvMalariaCase.referral,
+            barImageUrl: chvMalariaCase.barImageUrl,
+            comment: chvMalariaCase.comment,
+            status: chvMalariaCase.status,
+            subVillage: chvMalariaCase.subVillage?.code,
+            chv: chvMalariaCase.chv?.code,
+            gpsLocation: chvMalariaCase.gpsLocation?.longitude.toString(),
+            synced: chvMalariaCase.synced,
             locationProvided: chvMalariaCase.gpsLocation != null,
-            // status: chvMalariaCase.status,
-            // TODO add logic
-            canComplete: false,
-            // TODO add logic
-            canSync: false,
-            // TODO add logic
-            completed: false,
-            synced: chvMalariaCase.synced);
+            canComplete: canComplete,
+            canSync: canSync,
+            validationErrors: validationErrors);
       }).toList();
     } on DomainError catch (error) {
       if (error == DomainError.accessDenied) {
@@ -62,8 +80,31 @@ class GetxChvMalariaCasesListPresenter extends GetxController
   @override
   Future<void> syncChvMalariaCase(int caseId) async {}
 
+  List<String> _validateFields(Map<String, dynamic> dataMap) {
+    // dataMap.isNotEmpty
+    List<String> validationErrors = [];
+    dataMap.forEach((k, v) {
+      // Todo Delete print
+      if (kDebugMode) {
+        print('Key : $k, Value : $v');
+      }
+      final error = validation.validate(field: k, input: dataMap);
+      switch (error) {
+        case ValidationError.invalidField:
+          validationErrors.add('field: $k, Error: invalidField');
+          break;
+        case ValidationError.requiredField:
+          validationErrors.add('field: $k, Error: Required');
+          break;
+        default:
+        // return;
+      }
+    });
+    return validationErrors;
+  }
+
   @override
-  void goToChvMalariaCaseForm(String caseId) {
+  void goToChvMalariaCaseForm(int? caseId) {
     navigateTo = '/chv_malaria_case_form/$caseId';
   }
 }
