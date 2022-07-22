@@ -1,15 +1,16 @@
-enum MalariaTestResultEnum { negative, pf, pv, mix, invalid }
+enum MalariaTestResultEnum { unknown, negative, pf, pv, mix, invalid }
 
-enum GenderEnum { male, female, none }
+enum GenderEnum { unknown, male, female }
 
-enum AgeGroupEnum { lessThan5y, greaterThan5y }
+enum AgeGroupEnum { unknown, lessThan5y, greaterThan5y }
 
-enum SeverityEnum { simple, severe, none }
+enum SeverityEnum { unknown, simple, severe }
 
 enum ReportStatusEnum { complete, incomplete }
 
-enum YesNoEnum { yes, no, none }
+enum YesNoEnum { unknown, yes, no }
 
+// TODO Translate all str values
 extension MalariaTestResultEnumExtension on MalariaTestResultEnum {
   String get value {
     switch (this) {
@@ -23,6 +24,8 @@ extension MalariaTestResultEnumExtension on MalariaTestResultEnum {
         return 'MIX';
       case MalariaTestResultEnum.invalid:
         return 'INVALID';
+      case MalariaTestResultEnum.unknown:
+        return 'Select one';
       default:
         return '';
     }
@@ -36,6 +39,11 @@ extension MalariaTestResultEnumExtension on MalariaTestResultEnum {
     } else {
       return false;
     }
+  }
+
+  static MalariaTestResultEnum fromString({String value = 'unknown'}) {
+    return MalariaTestResultEnum.values
+        .firstWhere((e) => e.name.toLowerCase() == value.toLowerCase());
   }
 }
 
@@ -60,6 +68,11 @@ extension GenderEnumExtension on GenderEnum {
       return false;
     }
   }
+
+  static GenderEnum fromString({String value = 'unknown'}) {
+    return GenderEnum.values
+        .firstWhere((e) => e.name.toLowerCase() == value.toLowerCase());
+  }
 }
 
 extension AgeGroupEnumExtension on AgeGroupEnum {
@@ -82,6 +95,11 @@ extension AgeGroupEnumExtension on AgeGroupEnum {
     } else {
       return false;
     }
+  }
+
+  static AgeGroupEnum fromString({String value = 'unknown'}) {
+    return AgeGroupEnum.values
+        .firstWhere((e) => e.name.toLowerCase() == value.toLowerCase());
   }
 }
 
@@ -106,6 +124,11 @@ extension SeverityEnumExtension on SeverityEnum {
       return false;
     }
   }
+
+  static SeverityEnum fromString({String value = 'unknown'}) {
+    return SeverityEnum.values
+        .firstWhere((e) => e.name.toLowerCase() == value.toLowerCase());
+  }
 }
 
 extension ReportStatusEnumExtension on ReportStatusEnum {
@@ -129,6 +152,11 @@ extension ReportStatusEnumExtension on ReportStatusEnum {
       return false;
     }
   }
+
+  static ReportStatusEnum fromString(String value) {
+    return ReportStatusEnum.values
+        .firstWhere((e) => e.name.toLowerCase() == value.toLowerCase());
+  }
 }
 
 extension YesNoEnumExtension on YesNoEnum {
@@ -151,5 +179,10 @@ extension YesNoEnumExtension on YesNoEnum {
     } else {
       return false;
     }
+  }
+
+  static YesNoEnum fromString({String value = 'unknown'}) {
+    return YesNoEnum.values
+        .firstWhere((e) => e.name.toLowerCase() == value.toLowerCase());
   }
 }

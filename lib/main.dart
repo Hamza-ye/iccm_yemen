@@ -16,7 +16,7 @@ class App extends StatelessWidget {
     final routeObserver = Get.put<RouteObserver>(RouteObserver<PageRoute>());
 
     return GetMaterialApp(
-      title: '4Dev',
+      title: 'ICCM Yemen',
       debugShowCheckedModeBanner: false,
       theme: makeAppTheme(),
       navigatorObservers: [routeObserver],
@@ -30,7 +30,7 @@ class App extends StatelessWidget {
             name: '/chv_malaria_cases_list',
             page: makeChvMalariaCasesListPage,
             transition: Transition.fadeIn),
-        // GetPage(name: '/survey_result/:survey_id', page: makeSurveyResultPage),
+        // GetPage(name: '/chv_malaria_case_form/:case_id', page: makeChvMalariaCaseFormPage),
       ],
     );
   }

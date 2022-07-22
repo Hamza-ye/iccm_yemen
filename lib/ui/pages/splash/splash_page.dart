@@ -13,7 +13,7 @@ class SplashPage extends StatelessWidget with NavigationManager {
     presenter.checkAccount();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('4Dev')),
+      appBar: AppBar(title: const Text('ICCM Yemen')),
       body: Builder(
         builder: (context) {
           handleNavigation(presenter.navigateToStream, clear: true);

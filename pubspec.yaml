@@ -24,6 +24,7 @@ dependencies:
   localstorage: ^4.0.0+1
   carousel_slider: ^4.1.1
   formz: ^0.4.1
+  uuid: ^3.0.6
 #  freezed_annotation: ^2.1.0
 #  json_annotation: ^4.6.0
 
